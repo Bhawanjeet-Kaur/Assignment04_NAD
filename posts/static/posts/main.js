@@ -41,7 +41,7 @@ const likeUnlikePosts = () => {
                 clickedBtn.textContent = response.liked ? `Unlike (${response.count})` : `Like  (${response.count})`
             },
             error: function(error){
-                CSSConditionRule.log(error)
+                console.log(error)
             }
         })
     }))

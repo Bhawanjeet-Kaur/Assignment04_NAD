@@ -15,8 +15,8 @@ def my_profile_view(request):
                 'avatar': instance.avatar.url,
                 'user': instance.user.username
             })
-        context = {
-            'obj': obj,
-            'form': form,
-        }
-        return render(request, 'profiles/main.html', context)
+    context = {
+        'obj': obj,
+        'form': form,
+    }
+    return render(request, 'profiles/main.html', context)

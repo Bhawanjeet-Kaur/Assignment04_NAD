@@ -1,4 +1,6 @@
+from django import views
 from django.urls import path
+from . import views
 from .views import(
     post_list_and_create,
     load_posts_data_view,
@@ -22,4 +24,5 @@ urlpatterns = [
 
     path('data/<int:num_posts>/', load_posts_data_view, name='posts-data'),
     path('<pk>/data/', post_detail_data_view, name='post-detail-data'),
+    path('search/', views.search_view, name='search-view'),
 ]

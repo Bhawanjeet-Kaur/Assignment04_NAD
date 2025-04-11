@@ -5,6 +5,7 @@ from .forms import PostForm
 from profiles.models import Profile
 from .utils import action_permission
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 # Create your views here.
 
 @login_required
@@ -126,10 +127,27 @@ def image_upload_view(request):
         Photo.objects.create(image=img, post=post)
     return HttpResponse()
 
-def search_view(request):
+#def search_view(request):
     # Example logic (adapt as needed)
-    if request.method == 'POST':
-        query = request.POST.get('q')
+ #   if request.method == 'POST':
+  #      query = request.POST.get('q')
         # do something with query
-        return render(request, 'posts/search_results.html', {'query': query})
-    return render(request, 'posts/search_results.html')
+    #    return render(request, 'posts/search_results.html', {'query': query})
+   # return render(request, 'posts/search_results.html')
+
+def search_view(request):
+    query = request.GET.get('q')  # use GET so results can be bookmarked/shared
+    posts = []
+
+    if query:
+        # case-insensitive search in title or body
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(body__icontains=query)
+        )
+
+    context = {
+        'query': query,
+        'posts': posts
+    }
+    return render(request, 'posts/search_results.html', context)

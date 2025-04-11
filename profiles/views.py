@@ -19,5 +19,4 @@ def my_profile_view(request):
             'obj': obj,
             'form': form,
         }
-
         return render(request, 'profiles/main.html', context)

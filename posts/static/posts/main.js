@@ -177,6 +177,8 @@ closeBtns.forEach(btn=> btn.addEventListener('click', ()=>{
     if(!dropozone.classList.contains('not-visible')){
         dropozone.classList.add('not-visible')
     }
+    const myDropzone = Dropzone.forElement("#my-dropzone")
+    myDropzone.removeAllFiles(true)
 }))
 
 Dropzone.autoDiscover = false
